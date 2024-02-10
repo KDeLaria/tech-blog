@@ -29,10 +29,11 @@ router.get('/blog/:id', async (req, res) => {
       attributes: { exclude: ['password'] }
     });
 
-    const commentData = await Comment.findAll({where:{blog_id:req.params.id}}, {
+    const commentData = await Comment.findAll({where:{blog_id:req.params.id},
       include: [{ model: User}],
       attributes: { exclude: ['password']}
     });
+    
     const blog = blogData.get({ plain: true });
     const comments = commentData.map((comment) => comment.get({ plain: true }));
 
