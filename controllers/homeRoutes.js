@@ -6,8 +6,7 @@ router.get('/', async (req, res) => {
   try {
     const blogData = await BlogPost.findAll({
       attributes: { exclude: ['password'] },
-      include: [{ model: User}, {model:Comment,
-      attributes:[["contents", "comment_contents"],["date_created", "comment_date"]] }],
+      include: [{ model: User}],
     });
 
     // Serialize data so the template can read it
@@ -26,18 +25,20 @@ router.get('/', async (req, res) => {
 router.get('/blog/:id', async (req, res) => {
   try {
     const blogData = await BlogPost.findByPk(req.params.id, {
-      include: [{model:Comment},
-        {
-          model: User,
-          attributes: ['name', "usrname"],
-        },
-      ],
+      include: [{ model: User}],
+      attributes: { exclude: ['password'] }
     });
 
+    const commentData = await Comment.findAll({where:{blog_id:req.params.id}}, {
+      include: [{ model: User}],
+      attributes: { exclude: ['password']}
+    });
     const blog = blogData.get({ plain: true });
+    const comments = commentData.map((comment) => comment.get({ plain: true }));
 
     res.render('blog', {
-      ...blog,
+      blog,
+      comments,
       loggedIn: req.session.loggedIn
     });
   } catch (err) {

@@ -1,12 +1,12 @@
 <div class="text-center">
   <h2>{{blog.name}}</h2>
   <p>{{{blog.contents}}}</p>
-  <p>Created by {{blog.usrname}} on {{date_created}}.</p>
-  
-  {{#each blog.comments as |comment| }}
+  <p>Created by {{blog.user.name}} on {{blog.date_created}}.</p>
+
+  {{#each comments as |comment| }}
   <div class="col-md-10">
-  <p>{{{comment.contents}}}</p>
-  <p>Created by {{comment.user.name}} on {{format_date comment.date_created}}.</p>
+    <p>{{{comment.contents}}}</p>
+    <p>Created by {{comment.user.name}} on {{comment.date_created}}.</p>
   </div>
   {{/each}}
 </div>
