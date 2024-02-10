@@ -1,0 +1,22 @@
+{{#each blogs as |blog| }}
+<div class="row mb-4 project">
+  <div class="col-md-5">
+    <h2>
+      <a href="/blog/{{blog.id}}">{{blog.name}}</a>
+    </h2>
+    <p>Created by {{blog.user.name}} on {{blog.date_created}}.</p>
+  </div>
+  <div class="col-md-7">
+    <p>
+      {{blog.contents}}
+    </p>
+  </div>
+  
+  {{#each blog.comments as |comment| }}
+  <div class="col-md-10">
+  <p>{{{blog.comment_contents}}}</p>
+  <p>Created by {{comment.usrname}} on {{comment.date_created}}.</p>
+  </div>
+  {{/each}}
+</div>
+{{/each}}
