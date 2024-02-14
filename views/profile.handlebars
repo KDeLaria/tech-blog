@@ -1,13 +1,12 @@
 <div class="row">
   <div class="col-auto">
-    <h2>Welcome, {{req.session.username}}!</h2>
+    <h2>Welcome, {{username}}!</h2>
   </div>
 </div>
 
 <div class="row mt-4">
   <div class="col-md-6">
     <h3>Create a New Blog:</h3>
-
     <form class="form new-blog-form">
       <div class="form-group">
         <label for="blog-name">Title:</label>
@@ -23,27 +22,17 @@
     </form>
   </div>
 
-  {{#if blogs.length}}
+  {{#if blogs}}
   <div class="col-md-6 blog-list">
     <h3>Current blogs:</h3>
-
     {{#each blogs as |blog|}}
     <div class="row mb-2">
       <div class="col-md-8">
-        <h4><a href="/blog/{{blog.id}}">{{blog.contents}}</a></h4>
+        <h4><a href="/blog/{{blog.id}}?fromProfile=true">{{blog.contents}}</a></h4>
       </div>
-      {{#if req.session.user_id blog.user.id}}
       <div class="col-md-4">
         <button class="btn btn-sm btn-danger" data-id="{{blog.id}}">DELETE</button>
       </div>
-      {{/if}}
-      {{#each blog.comments as |comment| }}
-      <div class="col-md-10">
-        <p>{{{comment.contents}}}</p>
-        <p>Created by {{comment.user.name}} on {{format_date comment.date_created}}.</p>
-      </div>
-      {{/each}}
-    </div>
     {{/each}}
   </div>
   {{/if}}

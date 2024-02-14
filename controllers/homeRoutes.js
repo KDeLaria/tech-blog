@@ -24,6 +24,7 @@ router.get('/', async (req, res) => {
 
 router.get('/blog/:id', async (req, res) => {
   try {
+    const fromProfile = (req.query.fromProfile)?req.query.fromProfile:false;
     const blogData = await BlogPost.findByPk(req.params.id, {
       include: [{ model: User}],
       attributes: { exclude: ['password'] }
@@ -39,6 +40,7 @@ router.get('/blog/:id', async (req, res) => {
 
     res.render('blog', {
       blog,
+      fromProfile,
       comments,
       loggedIn: req.session.loggedIn
     });
@@ -51,19 +53,20 @@ router.get('/blog/:id', async (req, res) => {
 router.get('/profile', isAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: BlogPost}, {model:Comment }],
-    });
+    const blogData = await BlogPost.findAll({where:{user_id:req.session.user_id},
+      include: [{ model: User}],
+      attributes: { exclude: ['password']}});
 
-    const user = userData.get({ plain: true });
+    const blogs = blogData.map((blog) => blog.get({ plain: true }));
 
     res.render('profile', {
-      ...user,
-      loggedIn: true
+      blogs,
+      loggedIn: req.session.loggedIn,
+      user_id: req.session.user_id,
+      username: req.session.username
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({error:err.message});
   }
 });
 

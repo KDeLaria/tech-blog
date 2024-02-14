@@ -5,8 +5,10 @@ const isAuth = require('../../utils/auth');
 router.post('/', isAuth, async (req, res) => {
   try {
     const newBlog = await BlogPost.create({
-      ...req.body,
+      name:req.body.name, 
+      contents:req.body.contents,
       user_id: req.session.user_id,
+      date_created: new Date ()
     });
 
     res.status(200).json(newBlog);
