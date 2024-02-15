@@ -1,16 +1,19 @@
-<div class="text-center">
+<div class="">
   <h2>{{blog.name}}</h2>
   <p>{{{blog.contents}}}</p>
   <p>Created by {{blog.user.name}} on {{blog.date_created}}.</p>
   <div>
-  {{#each comments as |comment| }}
-    <div class="col-md-10">
-      <p>{{{comment.contents}}}</p>
-      <p>Created by {{comment.user.name}} on {{comment.date_created}}.</p>
+    <div class="comment-list">
+      {{#each comments as |comment| }}
+      <div class="col-md-10">
+        <p>{{{comment.contents}}}</p>
+        <p>Created by {{comment.user.name}} on {{comment.date_created}}.</p>
+        <button class="btn btn-sm btn-danger" data-id="{{comment.id}}" data-blog_id="{{blog.id}}">
+          DELETE</button>
+      </div>
+      {{/each}}
+    </div>
   </div>
-  {{/each}}
-  </div>
-  {{#if loggedIn}}
   <form class="form new-comment-form">
     <div class="form-group">
       <label for="comment-contents">Comment:</label>
@@ -20,6 +23,5 @@
       <button type="submit" class="btn btn-primary">Add Comment</button>
   </form>
 </div>
-<script src="./js/comment.js"></script>
-{{/if}}
+<script src="../js/dashComment.js"></script>
 </div>

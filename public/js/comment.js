@@ -14,29 +14,11 @@ const newCommentHandler = async (event) => {
       });
   
       if (response.ok) {
-        document.location.replace('/profile');
+        document.location.replace(`/blog/${blog_id}`);
       } else {
         alert('Failed to add comment');
       }
     }
-  };
-
-const delCommentHandler = async (event) => {
-    if (event.target.hasAttribute('data-id')) {
-      const id = event.target.getAttribute('data-id');
-  
-      const response = await fetch(`/api/comments/${id}`, {
-        method: 'DELETE',
-      });
-  
-      if (response.ok) {
-        document.location.replace('/profile');
-      } else {
-        alert('Failed to delete comment');
-      }
-    }
-  };  
+  }; 
 
 document.querySelector(".new-comment-form").addEventListener("submit", newCommentHandler);
-if(document.querySelector('.comment-list')){
-    document.querySelector('.comment-list').addEventListener('click', delCommentHandler);}

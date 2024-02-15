@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { BlogPost, Comment } = require('../../models');
+const { BlogPost } = require('../../models');
 const isAuth = require('../../utils/auth');
 
 router.post('/', isAuth, async (req, res) => {
@@ -11,6 +11,25 @@ router.post('/', isAuth, async (req, res) => {
       date_created: new Date ()
     });
 
+    res.status(200).json(newBlog);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.put('/:id', isAuth, async (req, res) => {
+  try {
+    const blogData = await BlogPost.update({
+      name:req.body.name,
+      contents:req.body.contents},
+      {where: {
+        id: req.params.id,
+        user_id: req.session.user_id}});
+
+    if (!blogData) {
+      res.status(404).json({ message: 'No blog found with this id!' });
+      return;
+    }
     res.status(200).json(newBlog);
   } catch (err) {
     res.status(400).json(err);
