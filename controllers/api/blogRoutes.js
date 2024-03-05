@@ -2,6 +2,18 @@ const router = require('express').Router();
 const { BlogPost } = require('../../models');
 const isAuth = require('../../utils/auth');
 
+router.get('/:id', async (res, req) => {
+try {
+  const blogData = await BlogPost.findByPk(req.params.id);
+  const blog = blogData.get({ plain: true });
+  
+  res.status(200).json(blog);
+  
+} catch (err) {
+  res.status(500).json({error:err.message});
+}
+});
+
 router.post('/', isAuth, async (req, res) => {
   try {
     const newBlog = await BlogPost.create({
