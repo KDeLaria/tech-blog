@@ -1,7 +1,7 @@
 # Tech Blog
 
 ![Tech Blog](./screenshot.png)
-Visit the [Tech Blog](https://kdelaria.github.io/note-taker/) webpage.
+Visit the [Tech Blog](https://kdelaria-tech-blog-392fb05ef7e8.herokuapp.com/) webpage.
 
 ## Description
 
