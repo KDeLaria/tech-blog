@@ -1,6 +1,6 @@
 # Tech Blog
 
-![Tech Blog](./screenshot.png)
+[<img src="./screenshot.png">](https://kdelaria-tech-blog-392fb05ef7e8.herokuapp.com/)
 Visit the [Tech Blog](https://kdelaria-tech-blog-392fb05ef7e8.herokuapp.com/) webpage.
 
 ## Description
@@ -13,7 +13,7 @@ N/A
 
 ## Usage
 
-Click signup to register.  You can add and delete posts and comments.
+Click **signup** to register.  You can add and delete posts and comments.
 
 ## License
 N/A
