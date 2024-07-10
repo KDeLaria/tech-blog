@@ -1,7 +1,7 @@
 # Tech Blog
 
-[<img src="./screenshot.png">](https://kdelaria-tech-blog-392fb05ef7e8.herokuapp.com/)
-Visit the [Tech Blog](https://kdelaria-tech-blog-392fb05ef7e8.herokuapp.com/) webpage.
+[<img src="./screenshot.png">](https://github.com/KDeLaria/tech-blog/)
+<!-- Visit the [Tech Blog](https://kdelaria-tech-blog-392fb05ef7e8.herokuapp.com/) webpage. -->
 
 ## Description
 
